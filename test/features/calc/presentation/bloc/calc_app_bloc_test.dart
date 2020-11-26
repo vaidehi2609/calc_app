@@ -1,11 +1,16 @@
 import 'package:calc_app/features/calc/presentation/bloc/calc_app_bloc.dart';
-import 'package:math_expressions/math_expressions.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:bloc_test/bloc_test.dart';
+
+class MockCalcAppBloc extends Mock 
+  implements CalcAppBloc{}
 
 void main(){
   CalcAppBloc bloc;
+  
   setUp((){
+    
     bloc = CalcAppBloc(
       CalcAppInitial()
     );
@@ -16,15 +21,52 @@ void main(){
       expect(bloc.initialState,CalcAppInitial());
 
     });
-    group('Calculations', () {
-      String a = '1';
-      String b = '2';
-      String result = '3';
-      test('when all clear is pressed result should return to initil state', (){
-        //arrange
-        
-      });
-    }
+    group(
+      
+      'NumberPressed',(){
+       String one='1';
+        blocTest<CalcAppBloc,CalcAppState>('emits number', 
+        build: ()=> CalcAppBloc(CalcAppInitial()),
+        act:(bloc) async=>bloc.add(NumberPressed(number: 1)) ,
+        expect: [Add(expression: one)]
+        );
+      }
+    );
+    group(
+      
+      'OperatorPressed',(){
+       String add = '+';
+        blocTest<CalcAppBloc,CalcAppState>('emits null cause lastnum is false', 
+        build: ()=> CalcAppBloc(CalcAppInitial()),
+        act:(bloc) async=>bloc.add(OperatorPressed(operators: Operators.add)) ,
+        expect: []
+        );
+      }
+    );
 
-  );
+    group(
+      
+      'ClearCalculation',(){
+      
+        blocTest<CalcAppBloc,CalcAppState>('emits initial state', 
+        build: ()=> CalcAppBloc(CalcAppInitial()),
+        act:(bloc) async=>bloc.add(ClearCalculation()) ,
+        expect: [CalcAppInitial()]
+        );
+      }
+    );
+    group(
+      
+      'CalculateResult',(){
+      String result;
+        blocTest<CalcAppBloc,CalcAppState>('emits result', 
+        build: ()=> CalcAppBloc(CalcAppInitial()),
+        act:(bloc) async=>bloc.add(CalculateResult()) ,
+        expect: []
+        );
+      }
+    );
+
+
+    
 }

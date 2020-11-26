@@ -2,7 +2,6 @@ import 'package:calc_app/features/calc/presentation/bloc/calc_app_bloc.dart';
 import 'package:calc_app/features/calc/presentation/widgets/buttons.dart';
 import 'package:calc_app/features/calc/presentation/widgets/screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CalcPage extends StatefulWidget {
   @override
