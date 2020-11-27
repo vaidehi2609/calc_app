@@ -11,14 +11,11 @@ abstract class CalcAppState extends Equatable {
 
 class CalcAppInitial extends CalcAppState{}
 
-class NumberAdded extends CalcAppState{}
 
-class OperatorAdded extends CalcAppState{}
-
-class Add extends CalcAppState{
+class DisplayExpression extends CalcAppState{
   final String expression;
 
-  Add({this.expression});
+  DisplayExpression({this.expression});
   @override
   List<Object> get props => [expression];
 }

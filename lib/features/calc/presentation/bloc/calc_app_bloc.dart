@@ -17,7 +17,7 @@ class CalcAppBloc extends Bloc<CalcAppEvent, CalcAppState> {
   }
   bool lastNum;
   var calculation='';
-  var expression='';
+  
   @override
   Stream<CalcAppState> mapEventToState(
     CalcAppEvent event,
@@ -25,34 +25,34 @@ class CalcAppBloc extends Bloc<CalcAppEvent, CalcAppState> {
     if (event is NumberPressed){
       lastNum =true;
       calculation+='${event.number}';
-      expression+='${event.number}';
-      yield Add(expression: expression);
+     
+      yield DisplayExpression(expression: calculation);
           }
     if (event is OperatorPressed){
       if(lastNum){
         lastNum=false;
         if(event.operators == Operators.add){
           calculation+='+';
-          expression+='+';
+          
         }else if(event.operators == Operators.minus){
           calculation+='-';
-          expression+='-';
+          
         }else if(event.operators == Operators.multiply){
           calculation+='*';
-          expression+='*';
+          
         }else if(event.operators == Operators.divide){
           calculation+='/';
-          expression+='/';
+          
         }else{
           calculation+='unknown operators';
-          expression+='unknown operators';
+          
         }
         }
-        yield Add(expression: expression);
+        yield DisplayExpression(expression: calculation);
       }
     if (event is ClearCalculation){
       calculation='';
-      expression='';
+      
       yield CalcAppInitial();
           }     
 

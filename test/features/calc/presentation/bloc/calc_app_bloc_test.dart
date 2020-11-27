@@ -28,14 +28,14 @@ void main(){
         blocTest<CalcAppBloc,CalcAppState>('emits number', 
         build: ()=> CalcAppBloc(CalcAppInitial()),
         act:(bloc) async=>bloc.add(NumberPressed(number: 1)) ,
-        expect: [Add(expression: one)]
+        expect: [DisplayExpression(expression: one)]
         );
       }
     );
     group(
       
       'OperatorPressed',(){
-       String add = '+';
+      
         blocTest<CalcAppBloc,CalcAppState>('emits null cause lastnum is false', 
         build: ()=> CalcAppBloc(CalcAppInitial()),
         act:(bloc) async=>bloc.add(OperatorPressed(operators: Operators.add)) ,
@@ -58,7 +58,7 @@ void main(){
     group(
       
       'CalculateResult',(){
-      String result;
+     
         blocTest<CalcAppBloc,CalcAppState>('emits result', 
         build: ()=> CalcAppBloc(CalcAppInitial()),
         act:(bloc) async=>bloc.add(CalculateResult()) ,

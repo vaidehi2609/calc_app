@@ -24,7 +24,7 @@ class Screen extends StatelessWidget {
             BlocBuilder<CalcAppBloc,CalcAppState>(
               cubit: _bloc,
               builder: (context,state){
-                if(state is Add){
+                if(state is DisplayExpression){
                 return Text(
                   state.expression,
                   style: TextStyle(
